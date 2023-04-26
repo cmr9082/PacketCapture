@@ -1,50 +1,54 @@
 def compute() :
 	print('called compute function in compute_metrics.py')
 
-	#node1
+	#take packets list and divide them into these lists:
+	#echo_req_sent
+	#echo_req_revd
+	#echo_replies_sent
+	#echo_replies_revd
 
 	#data size metrics
 
 	#number of echo requests sent
-	#count number of echo requests sent by node
+	#len(echo_req_sent)
 
 	#number of echo requests received
-	#count number of echo requests received by node
+	#len(echo_req_revd)
 
 	#number of echo replies sent
-	#count number of echo replies sent by node
+	#len(echo_replies_sent)
 
 	#number of echo replies receieved
-	#count number of echo replies receieved by node	
+	#len(echo_replies_revd)
 
 	#total echo request bytes sent
-	#sum the size of all echo requests sent by node in bytes
+	#echo_req_sent length sum
 
 	#total echo request bytes received
-	#sum the size of all echo requests received by node in bytes
+	#echo_req_revd length sum
 
 	#total echo request data sent
-	#sum the size of the payload of all echo requests sent by node in bytes
+	#(echo_req_sent length sum) - (len of echo_req_sent *42)
 
 	#total echo request data received
-	#sum the size of the payload of all echo requests received by node in bytes
+	#(echo_req_revd length sum) - (len of echo_req_revd *42)
 
 	#time based metrics
 
 	#average ping round trip time (RTT)
-	#calculate time difference between sending echo request and the receiving, average for all for the node
+	#echo_req_sent time - echo_req_revd time / len(echo_req_sent)
 
 	#echo request throughput
-	#calculate the sum of the frame sizes of all echo requests sent by node, divide by sum of all ping RTT, convert to kB/sec
+	#echo_req_sent length sum / (echo_req_sent time - echo_req_revd time / len(echo_req_sent))
 
 	#echo request goodput
-	#calculate the sum of payload for all echo requests sent by node, divide by sum by ping RTT, convert to kB/sec
+	#(echo_req_revd length sum) - (len of echo_req_revd *42)) / (echo_req_sent time - echo_req_revd time / len(echo_req_sent))
 
-	#avgerage reply delay
-	#calculate the time difference echo request and sending reply, average reply delay times, convert to microseconds
+	#average reply delay
+	#(echo_req_revd time - echo_repies_sent) / len(echo_req_revd)
 
 
 	#distance metric
 
 	#average number hops per echo request
-	#subtract TTL in echo request from TTL in echo reply to get number of hops, average with all echo requests sent by node
+	#echo_req_revd - echo_repies_sent /len(echo_req_sent)
