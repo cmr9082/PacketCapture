@@ -11,7 +11,7 @@ def listPackets(filename,list) :
 			packet = ""
 			packet = packet + "\n"+ line
 			line = infile.readline()
-	return list
+	
 
 def getCheck(filename,data) :
 	infile = open(filename, 'r')
@@ -32,4 +32,3 @@ checklist = []
 getCheck('Node1.txt', checklist)
 listPackets('Node1.txt',packets)
 
-print(packets[1])
