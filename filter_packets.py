@@ -1,6 +1,18 @@
 def listPackets(filename,list) :
 	infile = open(filename, 'r')
 	line = infile.readline()
+	packet = line
+	line = infile.readline()
+	while line :
+		while (line[0:3] != ('No.')) :
+			packet = packet + "\n"+ line
+			line = infile.readline()
+			print(packet)
+		list.append(packet)
+		#end of packet
+		packet = ""
+		line = infile.readline()
+	print(list[0])
 def getCheck(filename,data) :
 	infile = open(filename, 'r')
 	line = infile.readline()
@@ -17,6 +29,6 @@ def getCheck(filename,data) :
 #main
 packets = []
 checklist = []
-getCheck('Node1.txt', checklist)
-#listPackets('Node1.txt',packets)
-print(checklist)
+#getCheck('Node1.txt', checklist)
+listPackets('Node1.txt',packets)
+
