@@ -1,7 +1,6 @@
 import sys
 
 def parse():
-    print('called parse function in packet_parser.py')
     metrics = []
     with open(sys.argv[1], 'r') as doc:
         for line in doc:
