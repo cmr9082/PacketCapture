@@ -18,43 +18,43 @@ def compute(packets) :
 					echo_replies_revd.append(packet)
 
 	#data size metrics
+	num_echo_req_sent = len(echo_req_sent)
+	num_echo_req_revd = len(echo_req_revd)
+	num_echo_replies_sent = len(echo_replies_sent)
+	num_echo_replies_revd = len(echo_replies_revd)
 
-	#number of echo requests sent
-	#len(echo_req_revd)
+	total_echo_req_sent_bytes = sum(int(packet[5]) for packet in echo_req_sent)
+	total_echo_req_revd_bytes = sum(int(packet[5]) for packet in echo_req_revd)
 
-	#number of echo replies sent
-	#len(echo_replies_sent)
-
-	#number of echo replies receieved
-	#len(echo_replies_revd)
-
-	#total echo request bytes sent
-	#echo_req_sent length sum
-
-	#total echo request bytes received
-	#echo_req_revd length sum
-
-	#total echo request data sent
-	#(echo_req_sent length sum) - (len of echo_req_sent *42)
-
-	#total echo request data received
-	#(echo_req_revd length sum) - (len of echo_req_revd *42)
+	total_echo_req_sent_data = total_echo_req_sent_bytes - (num_echo_req_sent * 42)
+	total_echo_req_revd_data = total_echo_req_revd_bytes - (num_echo_req_revd * 42)
 
 	#time based metrics
+	avg_rtt = sum(int(echo_req_revd[i][1]) - int(echo_req_sent[i][1]) for i in range(len(echo_req_sent))) / len(echo_req_sent)
 
-	#average ping round trip time (RTT)
-	#echo_req_sent time - echo_req_revd time / len(echo_req_sent)
+	echo_req_throughput = total_echo_req_sent_bytes / ((int(echo_req_sent[0][1]))-(int(echo_req_sent[-1][1])))
 
-	#echo request throughput
-	#echo_req_sent length sum / (echo_req_sent time - echo_req_revd time / len(echo_req_sent))
+	echo_req_goodput = total_echo_req_revd_data / ((int(echo_req_sent[0][1]))-(int(echo_req_sent[-1][1])))
 
-	#echo request goodput
-	#(echo_req_revd length sum) - (len of echo_req_revd *42)) / (echo_req_sent time - echo_req_revd time / len(echo_req_sent))
-
-	#average reply delay
-	#(echo_req_revd time - echo_repies_sent) / len(echo_req_revd)
+	avg_reply_delay = sum(int(echo_replies_revd[i][1]) - int(echo_req_revd[i][1]) for i in range(len(echo_req_revd))) / len(echo_req_revd)
 
 	#distance metric
+	avg_num_hops = sum(128 - int(packet[8]) for packet in echo_req_revd) / len(echo_req_revd)
 
-	#average number hops per echo request
-	#echo_req_revd - echo_repies_sent /len(echo_req_sent)
+	metrics = {
+		"Echo Requents Sent": num_echo_req_sent,
+		"Echo Requents Received": num_echo_req_revd,
+		"Echo Replies Sent": num_echo_replies_sent,
+		"Echo Replies Received": num_echo_replies_revd,
+		"Echo Request Bytes Sent (bytes)": total_echo_req_sent_bytes,
+		"Echo Request Data Sent (bytes)": total_echo_req_sent_data,
+		"Echo Request Bytes Received (bytes)": total_echo_req_revd_bytes,
+		"Echo Request Data Received (bytes)": total_echo_req_revd_data,
+		"Average Ping Round Trip Time (RTT)": avg_rtt,
+		"Echo Request Throughput (kB/sec)": echo_req_throughput,
+		"Echo Request Goodput (kB/sec)": echo_req_goodput,
+		"Average Reply Delay (microseconds)": avg_reply_delay,
+		"Average Echo Request Hop Count": avg_num_hops
+	}
+	
+	return metrics
