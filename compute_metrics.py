@@ -1,18 +1,25 @@
-def compute() :
-	print('called compute function in compute_metrics.py')
+def compute(packets) :
+	echo_req_sent = []
+	echo_req_revd = []
+	echo_replies_sent = []
+	echo_replies_revd = []
 
-	#take packets list and divide them into these lists:
-	#echo_req_sent
-	#echo_req_revd
-	#echo_replies_sent
-	#echo_replies_revd
+	for packet in packets:
+		if packet[1] == 'ICMP':
+			if 'Echo (ping) request' in packet[3]:
+				if packet[2] == 'request':
+					echo_req_sent.append(packet)
+				elif packet[2] == 'reply':
+					echo_req_revd.append(packet)
+			if 'Echo (ping) reply' in packet[3]:
+				if packet[2] == 'request':
+					echo_replies_sent.append(packet)
+				elif packet[2] == 'reply':
+					echo_replies_revd.append(packet)
 
 	#data size metrics
 
 	#number of echo requests sent
-	#len(echo_req_sent)
-
-	#number of echo requests received
 	#len(echo_req_revd)
 
 	#number of echo replies sent
@@ -46,7 +53,6 @@ def compute() :
 
 	#average reply delay
 	#(echo_req_revd time - echo_repies_sent) / len(echo_req_revd)
-
 
 	#distance metric
 
