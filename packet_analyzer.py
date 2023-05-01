@@ -39,7 +39,3 @@ Node4Ip = "192.168.200.2"
 
 resultsies1 = compute(results1, Node1Ip)
 
-# results2 = parse('Node2_filtered.txt')
-# results3 = parse('Node3_filtered.txt')
-# results4 = parse('Node4_filtered.txt')
-

@@ -19,4 +19,3 @@ def filter(filename,filtered) :
 #main
 filtered = []
 filter('Node1.txt',filtered)
-#print(filtered[1])

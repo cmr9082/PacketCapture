@@ -18,5 +18,3 @@ def parse(filename):
     return metrics
 
 results = parse("Node1_filtered.txt")
-for metrics in results:
-    print(metrics[6])
