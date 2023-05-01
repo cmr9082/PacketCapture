@@ -1,13 +1,15 @@
-def compute(packets) :
+def compute(packets, NodeIp) :
 
 	echo_req_sent = []
 	echo_req_revd = []
 	echo_replies_sent = []
 	echo_replies_revd = []
 
+	print(packets)
+
 	for packet in packets:
-		if packet[1] == 'ICMP':
-			if '(ping) request' in packet[3]:
+		if packet[3] == 'ICMP':
+			if NodeIp in packet[1]:
 				if 'reply in' in packet[3]:
 					echo_req_sent.append(packet)
 				if 'request in' in packet[3]:
