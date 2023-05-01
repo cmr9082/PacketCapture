@@ -32,7 +32,12 @@ f4.close()
 
 results1 = parse('Node1_filtered.txt')
 
-resultsies1 = compute(results1)
+Node1Ip = "192.168.100.1"
+Node2Ip = "192.168.100.2"
+Node3Ip = "192.168.200.1"
+Node4Ip = "192.168.200.2"
+
+resultsies1 = compute(results1, Node1Ip)
 
 # results2 = parse('Node2_filtered.txt')
 # results3 = parse('Node3_filtered.txt')
