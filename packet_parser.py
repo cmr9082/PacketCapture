@@ -13,5 +13,10 @@ def parse(filename):
                     protocol = parts[4]
                     length = int(parts[5])
                     ttl = int(str(parts[11])[4:])
-                    metrics.append((time, source, dest, protocol, length, ttl))
+                    info = ' '.join(parts[6:9])
+                    metrics.append((time, source, dest, protocol, length, ttl, info))
     return metrics
+
+results = parse("Node1_filtered.txt")
+for metrics in results:
+    print(metrics[6])
