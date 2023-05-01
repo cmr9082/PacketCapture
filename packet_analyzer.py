@@ -38,4 +38,4 @@ Node3Ip = "192.168.200.1"
 Node4Ip = "192.168.200.2"
 
 resultsies1 = compute(results1, Node1Ip)
-
+#print(resultsies1)

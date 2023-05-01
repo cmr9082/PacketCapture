@@ -1,6 +1,6 @@
 def compute(packets, NodeIp) :
 
-	print(packets[0])
+	print(packets)
 
 	echo_req_sent = []
 	echo_req_revd = []
@@ -19,7 +19,7 @@ def compute(packets, NodeIp) :
 			else:
 				echo_replies_revd.append(packet)
 
-	# #data size metrics
+	#data size metrics
 	num_echo_req_sent = len(echo_req_sent)
 	num_echo_req_revd = len(echo_req_revd)
 	num_echo_replies_sent = len(echo_replies_sent)
@@ -34,14 +34,16 @@ def compute(packets, NodeIp) :
 	#time based metrics
 	#avg_rtt = sum(int(echo_replies_revd[i][0]) - int(echo_req_sent[i][0]) for i in range(len(echo_replies_revd))) / len(echo_replies_revd)
 
-	#echo_req_throughput = total_echo_req_sent_bytes / ((int(echo_req_sent[0][1]))-(int(echo_req_sent[-1][1])))
+	echo_req_throughput = total_echo_req_sent_bytes / ((int(echo_req_sent[0][1]))-(int(echo_req_sent[-1][1])))
+
+	print(echo_req_throughput)
 
 	# echo_req_goodput = total_echo_req_revd_data / ((int(echo_req_sent[0][1]))-(int(echo_req_sent[-1][1])))
 
 	# avg_reply_delay = sum(int(echo_replies_revd[i][1]) - int(echo_req_revd[i][1]) for i in range(len(echo_req_revd))) / len(echo_req_revd)
 
 	# #distance metric
-	# avg_num_hops = sum(128 - int(packet[8]) for packet in echo_req_revd) / len(echo_req_revd)
+	# avg_num_hops = sum(128 - int(packet[5]) for packet in echo_req_revd) / len(echo_req_revd)
 
 	# metrics = {
 	# 	"Echo Requents Sent": num_echo_req_sent,
