@@ -1,4 +1,5 @@
 def compute(packets) :
+
 	echo_req_sent = []
 	echo_req_revd = []
 	echo_replies_sent = []
@@ -6,16 +7,21 @@ def compute(packets) :
 
 	for packet in packets:
 		if packet[1] == 'ICMP':
-			if 'Echo (ping) request' in packet[3]:
-				if packet[2] == 'request':
+			if '(ping) request' in packet[3]:
+				if 'reply in' in packet[3]:
 					echo_req_sent.append(packet)
-				elif packet[2] == 'reply':
+				if 'request in' in packet[3]:
 					echo_req_revd.append(packet)
-			if 'Echo (ping) reply' in packet[3]:
-				if packet[2] == 'request':
+			if '(ping) reply' in packet[3]:
+				if 'reply in' in packet[3]:
 					echo_replies_sent.append(packet)
-				elif packet[2] == 'reply':
+				if 'request in' in packet[3]:
 					echo_replies_revd.append(packet)
+
+	#print(echo_req_sent)
+	# print(echo_req_revd)
+	# print(echo_replies_sent)
+	#print(echo_replies_revd)
 
 	#data size metrics
 	num_echo_req_sent = len(echo_req_sent)

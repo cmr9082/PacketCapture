@@ -1,25 +1,17 @@
 import sys
 
-def parse():
+def parse(filename):
     metrics = []
-    with open(sys.argv[1], 'r') as doc:
+    with open(filename, 'r') as doc:
         for line in doc:
                 newline = doc.readline().strip()
                 parts = newline.split()
                 if len(parts) >= 8 and parts[4] == "ICMP":
-                    time = parts[1]
+                    time = float(parts[1])
+                    source = parts[2]
+                    dest = parts[3]
                     protocol = parts[4]
-                    length = parts[5]
-                    info = ' '.join(parts[7:])
-                    metrics.append((time, protocol, length, info))
+                    length = int(parts[5])
+                    ttl = int(str(parts[11])[4:])
+                    metrics.append((time, source, dest, protocol, length, ttl))
     return metrics
-
-results = parse()
-print(results)
-
-for metrics in results:
-    print('Time:', metrics[0])
-    print('Protocol:', metrics[1])
-    print('Length:', metrics[2])
-    print('Info:', metrics[3])
-    print()

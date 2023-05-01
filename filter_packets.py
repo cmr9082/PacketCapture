@@ -1,4 +1,4 @@
-def filter(filename,list,filtered) :
+def filter(filename,filtered) :
 	infile = open(filename, 'r')
 	line = infile.readline()
 	isEcho = False
@@ -10,15 +10,13 @@ def filter(filename,list,filtered) :
 				isEcho = True
 			line = infile.readline()
 		elif((line[0:3] == ('No.'))):
-			list.append(packet)
 			if(isEcho) :
 				filtered.append(packet)
+				isEcho = False
 			packet = ""
 			packet = packet + "\n"+ line
 			line = infile.readline()
 #main
-packets = []
 filtered = []
-filter('Node1.txt',packets,filtered)
-print(packets[1])
-print(filtered[2])
+filter('Node1.txt',filtered)
+#print(filtered[1])
