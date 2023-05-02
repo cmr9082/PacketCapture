@@ -18,4 +18,3 @@ def filter(filename,filtered) :
 			line = infile.readline()
 #main
 filtered = []
-filter('Node1.txt',filtered)
