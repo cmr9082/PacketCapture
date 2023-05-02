@@ -1,12 +1,9 @@
 def compute(packets, NodeIp) :
-
-    #print(packets)
 	
     echo_req_sent = []
     echo_req_revd = []
     echo_replies_sent = []
     echo_replies_revd = []
-
 
     for packet in packets:
         if (packet[6].find('request') >= 0):
@@ -36,16 +33,13 @@ def compute(packets, NodeIp) :
     sum_rtt = sum(float(echo_replies_revd[i][0]) - float(echo_req_sent[i][0]) for i in range(len(echo_replies_revd)))*1000 
     avg_rtt = sum_rtt/len(echo_replies_revd)
 
-
     echo_req_throughput = total_echo_req_sent_bytes / sum_rtt
 
     echo_req_goodput = total_echo_req_sent_data / sum_rtt
 
     avg_reply_delay = (sum(float(echo_replies_sent[i][0]) - float(echo_req_revd[i][0]) for i in range(len(echo_req_revd))) / len(echo_req_revd))
 
-    avg_num_hops = sum(128 - float(packet[5]) for packet in echo_req_revd) / len(echo_req_revd)
-    
-
+    avg_num_hops = sum(128 - (packet[5]) for packet in echo_req_revd) / len(echo_req_revd)
 
     metrics = {
         "Echo Requents Sent": num_echo_req_sent,
