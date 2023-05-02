@@ -30,12 +30,29 @@ for instance in filtered4:
     f4.write(instance)
 f4.close()
 
-results1 = parse('Node1_filtered.txt')
 
-Node1Ip = "192.168.100.1"
-Node2Ip = "192.168.100.2"
-Node3Ip = "192.168.200.1"
-Node4Ip = "192.168.200.2"
+Node1Ip = str("192.168.100.1")
+Node2Ip = str("192.168.100.2")
+Node3Ip = str("192.168.200.1")
+Node4Ip = str("192.168.200.2")
 
-resultsies1 = compute(results1, Node1Ip)
-#print(resultsies1)
+
+
+parsed1 = parse('Node1_filtered.txt')
+computed1 = compute(parsed1, Node1Ip)
+print(computed1)
+
+parsed2 = parse('Node2_filtered.txt')
+computed2 = compute(parsed2, Node2Ip)
+print(computed2)
+
+parsed3 = parse('Node3_filtered.txt')
+computed3 = compute(parsed3, Node3Ip)
+print(computed3)
+
+parsed4 = parse('Node4_filtered.txt')
+computed4 = compute(parsed4, Node4Ip)
+print(computed4)
+
+
+
